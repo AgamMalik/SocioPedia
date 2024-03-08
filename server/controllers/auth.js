@@ -51,8 +51,10 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-    // so it doesn't gets send back to the frontend
+    // so it doesn't get sent back to the frontend
+    // console.log(user)
     delete user.password;
+    // console.log(user)
     
     res.status(200).json({ token, user });
   } catch (err) {
