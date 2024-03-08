@@ -37,6 +37,7 @@ export const getFeedPosts = async (req, res) => {
   }
 };
 
+// this will grab only the particular user feed posts
 export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -56,8 +57,10 @@ export const likePost = async (req, res) => {
     const isLiked = post.likes.get(userId);
 
     if (isLiked) {
+        // if user exists in likes..then delete
       post.likes.delete(userId);
     } else {
+        // if user doesn't exists in likes...then add
       post.likes.set(userId, true);
     }
 
