@@ -26,6 +26,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       }
     );
     const data = await response.json();
+
+    // we will get it in redux in action.payload.posts to update the posts value there
     dispatch(setPosts({ posts: data }));
   };
 
