@@ -27,6 +27,9 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
+
+  // because liked has a boolean type in post model in backend
+  // likes will be an object with userid as key
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
@@ -41,14 +44,20 @@ const PostWidget = ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+
+      // sending the current user id to backend to check if it exists in likes map or not
       body: JSON.stringify({ userId: loggedInUserId }),
     });
     const updatedPost = await response.json();
+
+    // to update that post in global state
     dispatch(setPost({ post: updatedPost }));
   };
 
   return (
     <WidgetWrapper m="2rem 0">
+
+      {/* friendId is the id of user who posted it */}
       <Friend
         friendId={postUserId}
         name={name}
