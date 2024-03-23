@@ -10,6 +10,8 @@ import UserWidget from "scenes/widgets/UserWidget";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
+
+  // we are grabbing params here from friend component..after yser clicked on friend name.... there usenavigate directed the user to profile/userid ..we are grabbing this userid from params 
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
